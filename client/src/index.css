@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/****************** SIDEBAR ******************/
+.active {
+  background: rgb(243, 244, 246);
+}
+
+.active:hover {
+  background: rgb(243, 244, 246) !important;
+}
+
+.active > svg {
+  color: rgb(26, 86, 219);
+}
+
+/****************** PROFILE ******************/
+.upload > span {
+  width: 100%;
+  padding: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .inputWidth {
+    width: calc(100% - 16px) !important;
+  }
+}
+
+/****************** CLIENTS ******************/
+.modalParent > div > div {
+  max-height: 80vh;
+}
+
+.isActive > div {
+  background: rgb(49, 196, 141);
+  border: rgb(49, 196, 141);
+}
+
+.inactive > div {
+  background: rgb(213, 213, 213);
+  border: rgb(213, 213, 213);
+}
+
+.remove-round input {
+  width: 100%;
+  text-indent: 24px;
+}
+
+.avatar span {
+  font-size: 20px;
+}
+
+@media screen and (min-width: 760px) {
+  .remove-round input {
+    min-width: 300px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .mobilexs {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .buttonxs {
+    width: 100% !important;
+  }
+}
+
+/****************** APPOINTMENTS ******************/
+.appointmentCard > div {
+  padding: 16px;
+}
+
+.searchCard > div {
+  padding: 10px;
+}
+
+.cancel > span:hover,
+.cancel:hover {
+  color: black !important;
+}
+
+@media screen and (min-width: 1280px) {
+  .paddingLeft {
+    padding-left: 48px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .searchCard {
+    max-width: 295px !important;
+  }
+}
+
+/****************** FLOWBITE CARD COMPONENT ******************/
+.card > div {
+  justify-content: start;
+  gap: 48px;
+  padding: 48px;
+}
+
+@media screen and (max-width: 700px) {
+  .card > div {
+    justify-content: start;
+    gap: 48px;
+    padding: 32px;
+  }
+}
+
+/****************** OVERWRITE FOCUS RING FOR INPUTS ******************/
+.textInput input:focus,
+.selectInput select:focus {
+  box-shadow: 0 0 0 1px rgb(26, 86, 219) !important;
+  border: 1px solid rgb(26, 86, 219) !important;
+}
