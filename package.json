@@ -1,0 +1,20 @@
+{
+  "name": "fitness-buddy-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "echo \"No build specified\" && exit 1",
+    "test": "echo \"No test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hun-ah/fitness-buddy-monorepo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hun-ah/fitness-buddy-monorepo/issues"
+  },
+  "homepage": "https://github.com/hun-ah/fitness-buddy-monorepo#readme"
+}
