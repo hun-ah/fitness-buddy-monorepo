@@ -3,7 +3,7 @@ import { Button, Spinner } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext as IsLoading } from '@/components/contexts/IsLoadingContext';
 import apiUrl from '@/api';
-import Input from '@/components/inputs/home/Input';
+import Input from '@/components/inputs/Input';
 import { loginInputs } from '@/props/props';
 
 const Login = () => {
