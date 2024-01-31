@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-const User = require('../models/User');
-const Client = require('../models/Client');
-const Appointment = require('../models/Appointment');
+const User = require('../../models/User');
+const Client = require('../../models/Client');
+const Appointment = require('../../models/Appointment');
 const bcrypt = require('bcrypt');
-const cloudinary = require('../middleware/cloudinary');
+const cloudinary = require('../../middleware/cloudinary');
 
 module.exports = {
   /****** USER ******/
