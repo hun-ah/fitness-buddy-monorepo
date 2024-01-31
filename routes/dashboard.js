@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const express = require('express');
 const router = express.Router();
-const dashboardController = require('../api/controllers/dashboard');
+const dashboardController = require('../controllers/dashboard');
 const { ensureAuthenticated } = require('../config/auth');
 const upload = require('../middleware/multer');
 
