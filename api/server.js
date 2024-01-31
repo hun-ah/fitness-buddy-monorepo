@@ -51,6 +51,12 @@ app.use('/api/login', loginRoutes);
 app.use('/api/logout', logoutRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
+app.use(express.static(path.join(__dirname, './client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/dist/index.html'));
+});
+
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
