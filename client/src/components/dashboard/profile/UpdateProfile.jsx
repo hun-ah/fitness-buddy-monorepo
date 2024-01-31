@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import apiUrl from '@/api';
+import Input from '@/components/inputs/Input';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
-import { formatPhoneNumber } from '@/helpers/helpers';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { profileInputs } from '@/props/props';
 import { useAppContext as ClientContext } from '@/components/contexts/ClientContext';
 import { useAppContext as UserContext } from '@/components/contexts/UserContext';
 import { useEffect, useState } from 'react';
@@ -191,6 +192,11 @@ const UpdateProfile = ({ setSaved }) => {
     }
   };
 
+  const inputs = profileInputs(formInputs, errMsg, user);
+  const nameInputs = inputs.slice(0, 2);
+  const contactInputs = inputs.slice(2, 4);
+  const securityInputs = inputs.slice(4, 6);
+
   return (
     <form
       className='flex flex-wrap gap-8 flex-col lg:flex-row'
@@ -228,151 +234,40 @@ const UpdateProfile = ({ setSaved }) => {
       </Modal>
       <div className='flex flex-col gap-4 flex-1'>
         <h2 className='text-md font-bold'>You</h2>
-        <div>
-          <div className='mb-2 block'>
-            <Label htmlFor='firstName' value='First name' />
-          </div>
-          <TextInput
-            id='firstName'
-            name='firstName'
-            type='text'
-            placeholder={user.firstName}
-            value={formInputs.firstName}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                firstName: '',
-              }));
-            }}
-            shadow
-            color={errMsg.firstName ? 'failure' : 'gray'}
-            helperText={errMsg.firstName && errMsg.firstName}
+        {nameInputs.map((input) => (
+          <Input
+            key={input.label.htmlFor}
+            label={input.label}
+            input={input.input}
+            handleInputChange={handleInputChange}
+            setErrMsg={setErrMsg}
           />
-        </div>
-        <div>
-          <div className='mb-2 block'>
-            <Label htmlFor='lastName' value='Last name' />
-          </div>
-          <TextInput
-            id='lastName'
-            name='lastName'
-            type='text'
-            placeholder={user.lastName}
-            value={formInputs.lastName}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                lastName: '',
-              }));
-            }}
-            shadow
-            color={errMsg.lastName ? 'failure' : 'gray'}
-            helperText={errMsg.lastName && errMsg.lastName}
-          />
-        </div>
+        ))}
       </div>
       <div className='flex flex-col gap-4 flex-1'>
         <h2 className='text-md font-bold'>Contact</h2>
-        <div>
-          <div className='mb-2 block'>
-            <Label htmlFor='firstName' value='Email' />
-          </div>
-          <TextInput
-            id='email'
-            name='email'
-            placeholder={user.email}
-            value={formInputs.email}
-            type='text'
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                email: '',
-              }));
-            }}
-            shadow
-            color={errMsg.email ? 'failure' : 'gray'}
-            helperText={errMsg.email && errMsg.email}
+        {contactInputs.map((input) => (
+          <Input
+            key={input.label.htmlFor}
+            label={input.label}
+            input={input.input}
+            handleInputChange={handleInputChange}
+            setErrMsg={setErrMsg}
           />
-        </div>
-        <div>
-          <div className='mb-2 block'>
-            <Label htmlFor='lastName' value='Phone number' />
-          </div>
-          <TextInput
-            id='phone'
-            name='phone'
-            type='text'
-            placeholder={formatPhoneNumber(user.phone)}
-            value={formInputs.phone}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                phone: '',
-              }));
-            }}
-            shadow
-            color={errMsg.phone ? 'failure' : 'gray'}
-            helperText={errMsg.phone && errMsg.phone}
-          />
-        </div>
+        ))}
       </div>
       <div className='w-full'>
         <div className='lg:w-1/2 flex flex-col gap-4'>
           <h2 className='text-md font-bold'>Security</h2>
-          <div>
-            <div className='mb-2 block'>
-              <Label htmlFor='password' value='Password' />
-            </div>
-            <TextInput
-              className='inputWidth textInput'
-              id='password'
-              name='password'
-              type='password'
-              placeholder='••••••••'
-              value={formInputs.password}
-              onChange={() => {
-                handleInputChange(event);
-                setErrMsg((prevMsg) => ({
-                  ...prevMsg,
-                  password: '',
-                }));
-              }}
-              shadow
-              color={errMsg.password ? 'failure' : 'gray'}
-              helperText={errMsg.password && errMsg.password}
+          {securityInputs.map((input) => (
+            <Input
+              key={input.label.htmlFor}
+              label={input.label}
+              input={input.input}
+              handleInputChange={handleInputChange}
+              setErrMsg={setErrMsg}
             />
-          </div>
-          <div>
-            <div className='mb-2 block'>
-              <Label htmlFor='confirmPassword' value='Confirm Password' />
-            </div>
-            <TextInput
-              className='inputWidth textInput'
-              id='confirmPassword'
-              name='confirmPassword'
-              type='password'
-              placeholder='••••••••'
-              value={formInputs.confirmPassword}
-              onChange={() => {
-                handleInputChange(event);
-                setErrMsg((prevMsg) => ({
-                  ...prevMsg,
-                  confirmPassword: '',
-                }));
-              }}
-              shadow
-              color={errMsg.confirmPassword ? 'failure' : 'gray'}
-              helperText={errMsg.confirmPassword && errMsg.confirmPassword}
-            />
-          </div>
+          ))}
         </div>
       </div>
       <div className='pt-4 border-t-[1px] flex justify-between w-full mobilexs'>
