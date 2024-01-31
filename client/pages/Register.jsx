@@ -8,6 +8,8 @@ import {
   passwordRegex,
 } from '@/helpers/regex';
 import apiUrl from '@/api';
+import Input from '@/components/inputs/home/Input';
+import { registerInputs } from '@/props/props';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -131,170 +133,24 @@ const Register = () => {
     }
   };
 
+  // pass Register component state to registerInputs (prevent errors in props.js file) and store in new variable to map over
+  const inputs = registerInputs(formInputs, errMsg);
+
   return (
     <section className='bg-white dark:bg-gray-900 flex-1 items-center px-4'>
       <form
         className='flex max-w-md flex-col gap-4 mx-auto py-[130px]'
         onSubmit={() => handleFormSubmit(event)}
       >
-        <div>
-          <div className='mb-2 block'>
-            <Label
-              htmlFor='firstName'
-              value='First name'
-              color={errMsg.name ? 'failure' : 'gray'}
-            />
-          </div>
-          <TextInput
-            id='firstName'
-            name='firstName'
-            type='text'
-            value={formInputs.firstName}
-            shadow
-            color={errMsg.firstName ? 'failure' : 'gray'}
-            helperText={errMsg.firstName && errMsg.firstName}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                firstName: '',
-              }));
-            }}
+        {inputs.map((input) => (
+          <Input
+            key={input.label.htmlFor}
+            label={input.label}
+            input={input.input}
+            handleInputChange={handleInputChange}
+            setErrMsg={setErrMsg}
           />
-        </div>
-        <div>
-          <div className='mb-2 block'>
-            <Label
-              htmlFor='lastName'
-              value='Last name'
-              color={errMsg.lastName ? 'failure' : 'gray'}
-            />
-          </div>
-          <TextInput
-            id='lastName'
-            name='lastName'
-            type='text'
-            value={formInputs.lastName}
-            shadow
-            color={errMsg.lastName ? 'failure' : 'gray'}
-            helperText={errMsg.lastName && errMsg.lastName}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                lastName: '',
-              }));
-            }}
-          />
-        </div>
-        <div>
-          <div className='mb-2 block'>
-            <Label
-              htmlFor='phone'
-              value='Phone number'
-              color={errMsg.phone ? 'failure' : 'gray'}
-            />
-          </div>
-          <TextInput
-            id='phone'
-            name='phone'
-            type='text'
-            value={formInputs.phone}
-            placeholder='647-123-4567'
-            shadow
-            color={errMsg.phone ? 'failure' : 'gray'}
-            helperText={errMsg.phone && errMsg.phone}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                phone: '',
-              }));
-            }}
-          />
-        </div>
-        <div>
-          <div className='mb-2 block'>
-            <Label
-              htmlFor='email'
-              value='Email'
-              color={errMsg.email ? 'failure' : 'gray'}
-            />
-          </div>
-          <TextInput
-            id='email'
-            name='email'
-            type='text'
-            value={formInputs.email}
-            placeholder='name@fitnessbuddy.com'
-            shadow
-            color={errMsg.email ? 'failure' : 'gray'}
-            helperText={errMsg.email && errMsg.email}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                email: '',
-              }));
-            }}
-          />
-        </div>
-        <div>
-          <div className='mb-2 block'>
-            <Label
-              htmlFor='password'
-              value='Password'
-              color={errMsg.password ? 'failure' : 'gray'}
-            />
-          </div>
-          <TextInput
-            id='password'
-            name='password'
-            type='password'
-            value={formInputs.password}
-            shadow
-            color={errMsg.password ? 'failure' : 'gray'}
-            helperText={errMsg.password && errMsg.password}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                password: '',
-              }));
-            }}
-          />
-        </div>
-        <div>
-          <div className='mb-2 block'>
-            <Label
-              htmlFor='confirm-password'
-              value='Confirm password'
-              color={errMsg.confirmPassword && 'failure'}
-            />
-          </div>
-          <TextInput
-            id='confirm-password'
-            name='confirmPassword'
-            type='password'
-            value={formInputs.confirmPassword}
-            shadow
-            color={errMsg.confirmPassword ? 'failure' : 'gray'}
-            helperText={errMsg.confirmPassword && errMsg.confirmPassword}
-            className='textInput'
-            onChange={() => {
-              handleInputChange(event);
-              setErrMsg((prevMsg) => ({
-                ...prevMsg,
-                confirmPassword: '',
-              }));
-            }}
-          />
-        </div>
+        ))}
         {registered ? (
           <Button color={success ? 'success' : 'blue'}>
             {success ? (
