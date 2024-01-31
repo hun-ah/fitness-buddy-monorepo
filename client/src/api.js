@@ -1,3 +1,3 @@
-const apiUrl = 'https://fitness-buddy-api.cyclic.app/api';
+const apiUrl = 'https://fitness-buddy-hwm.cyclic.app/api';
 
 export default apiUrl;
