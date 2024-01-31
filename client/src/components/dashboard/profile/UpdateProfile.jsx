@@ -192,6 +192,7 @@ const UpdateProfile = ({ setSaved }) => {
     }
   };
 
+  // pass UpdateProfile component state to profileInputs (prevent errors in props.js file) and store in new variable to map over
   const inputs = profileInputs(formInputs, errMsg, user);
   const nameInputs = inputs.slice(0, 2);
   const contactInputs = inputs.slice(2, 4);
