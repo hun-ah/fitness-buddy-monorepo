@@ -50,12 +50,11 @@ const AdminNavbar = ({ menuOpen, toggleMenu }) => {
   };
 
   return (
-    <>
+    <div onClick={(e) => e.stopPropagation()}>
       <div
         className={`${
           menuOpen ? 'w-64' : ''
         } border-b-[1px] fixed w-full h-[70px] bg-white z-10 sm:hidden`}
-        onClick={(e) => e.stopPropagation()}
       >
         <button
           data-drawer-target='default-sidebar'
@@ -79,10 +78,7 @@ const AdminNavbar = ({ menuOpen, toggleMenu }) => {
           <div className='border-b-[1px] pb-[20px] mb-[20px]'>
             <Logo height={33} width={200} />
           </div>
-          <ul
-            className='flex flex-col justify-between'
-            // style={{ height: 'calc(100% - 74px)' }}
-          >
+          <ul className='flex flex-col justify-between'>
             <div className='space-y-2'>
               <li>
                 <NavLink
@@ -137,7 +133,7 @@ const AdminNavbar = ({ menuOpen, toggleMenu }) => {
           </ul>
         </div>
       </aside>
-    </>
+    </div>
   );
 };
 
