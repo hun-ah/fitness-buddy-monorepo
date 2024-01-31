@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 const express = require('express');
 const connectDB = require('./config/db');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
@@ -24,9 +23,6 @@ require('dotenv').config({ path: './config/.env' });
 
 // Middleware
 app.use(nocache());
-app.use(
-  cors({ origin: 'https://fitness-buddy-hwm.cyclic.app', credentials: true })
-);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
