@@ -1,3 +1,5 @@
+import { formatPhoneNumber } from '@/helpers/helpers';
+
 export const loginInputs = (formInputs, errMsg) => {
   return [
     {
@@ -111,6 +113,95 @@ export const registerInputs = (formInputs, errMsg) => {
         inputValue: formInputs.confirmPassword,
         errMsg: errMsg.confirmPassword,
         name: 'confirmPassword',
+        type: 'password',
+      },
+    },
+  ];
+};
+
+export const profileInputs = (formInputs, errMsg, user) => {
+  return [
+    {
+      label: {
+        htmlFor: 'firstName',
+        labelValue: 'First Name',
+      },
+      input: {
+        id: 'firstName',
+        inputValue: formInputs.firstName,
+        errMsg: errMsg.firstName,
+        name: 'firstName',
+        placeholder: user.firstName,
+        type: 'text',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'lastName',
+        labelValue: 'Last Name',
+      },
+      input: {
+        id: 'lastName',
+        inputValue: formInputs.lastName,
+        errMsg: errMsg.lastName,
+        name: 'lastName',
+        placeholder: user.lastName,
+        type: 'text',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'email',
+        labelValue: 'Email',
+      },
+      input: {
+        id: 'email',
+        inputValue: formInputs.email,
+        errMsg: errMsg.email,
+        name: 'email',
+        placeholder: user.email,
+        type: 'text',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'phone',
+        labelValue: 'Phone number',
+      },
+      input: {
+        id: 'phone',
+        inputValue: formInputs.phone,
+        errMsg: errMsg.phone,
+        name: 'phone',
+        placeholder: formatPhoneNumber(user.phone),
+        type: 'text',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'password',
+        labelValue: 'Password',
+      },
+      input: {
+        id: 'password',
+        inputValue: formInputs.password,
+        errMsg: errMsg.password,
+        name: 'password',
+        placeholder: '••••••••',
+        type: 'password',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'confirmPassword',
+        labelValue: 'Confirm password',
+      },
+      input: {
+        id: 'confirmPassword',
+        inputValue: formInputs.password,
+        errMsg: errMsg.password,
+        name: 'password',
+        placeholder: '••••••••',
         type: 'password',
       },
     },
