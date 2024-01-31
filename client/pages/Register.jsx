@@ -8,7 +8,7 @@ import {
   passwordRegex,
 } from '@/helpers/regex';
 import apiUrl from '@/api';
-import Input from '@/components/inputs/home/Input';
+import Input from '@/components/inputs/Input';
 import { registerInputs } from '@/props/props';
 
 const Register = () => {
