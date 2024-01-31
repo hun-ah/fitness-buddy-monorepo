@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import apiUrl from '@/api';
 import Input from '@/components/inputs/Input';
-import { Button, Label, Modal, TextInput } from 'flowbite-react';
+import { Button, Modal } from 'flowbite-react';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { profileInputs } from '@/props/props';
 import { useAppContext as ClientContext } from '@/components/contexts/ClientContext';

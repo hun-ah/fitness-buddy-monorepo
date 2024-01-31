@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Label, TextInput, Spinner } from 'flowbite-react';
+import { Button, Spinner } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import {
   emailRegex,
