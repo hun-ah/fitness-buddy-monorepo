@@ -2,14 +2,7 @@
 import apiUrl from '@/api';
 import Input from '@/components/inputs/Input';
 import { clientProfileInputs } from '@/props/props';
-import {
-  Button,
-  Label,
-  Modal,
-  Select,
-  TextInput,
-  ToggleSwitch,
-} from 'flowbite-react';
+import { Button, Label, Modal, Select, ToggleSwitch } from 'flowbite-react';
 import { handleKeyPress } from '@/helpers/helpers';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { emailRegex, phoneRegex, whitespaceRegex } from '@/helpers/regex';
