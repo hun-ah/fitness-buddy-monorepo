@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import apiUrl from '@/api';
-import { Button, Label, Modal, Select, TextInput } from 'flowbite-react';
+import { addClientInputs } from '@/props/props';
+import { Button, Label, Modal, Select } from 'flowbite-react';
 import { handleKeyPress } from '@/helpers/helpers';
+import Input from '@/components/inputs/Input';
 import { emailRegex, phoneRegex, whitespaceRegex } from '@/helpers/regex';
 import { useState } from 'react';
 import { useAppContext as ClientContext } from '@/components/contexts/ClientContext';
@@ -97,6 +99,8 @@ const AddClient = ({ setOpen, isOpen, setSaved }) => {
     });
   };
 
+  const inputs = addClientInputs(newClient, errMsg);
+
   return (
     <>
       <Modal
@@ -113,94 +117,20 @@ const AddClient = ({ setOpen, isOpen, setSaved }) => {
         </Modal.Header>
         <Modal.Body>
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
-            <div>
-              <Label htmlFor='firstName'>First name</Label>
-              <div className='mt-1'>
-                <TextInput
-                  id='firstName'
-                  name='firstName'
-                  placeholder='Bonnie'
-                  type='text'
-                  value={newClient.firstName}
-                  color={errMsg.firstName ? 'failure' : 'gray'}
-                  helperText={errMsg.firstName && errMsg.firstName}
-                  className='textInput'
-                  onChange={() => {
-                    handleInputChange(event);
-                    setErrMsg((prevMsg) => ({
-                      ...prevMsg,
-                      firstName: '',
-                    }));
-                  }}
-                />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor='lastName'>Last name</Label>
-              <div className='mt-1'>
-                <TextInput
-                  id='lastName'
-                  name='lastName'
-                  type='text'
-                  placeholder='Green'
-                  value={newClient.lastName}
-                  color={errMsg.lastName ? 'failure' : 'gray'}
-                  helperText={errMsg.lastName && errMsg.lastName}
-                  className='textInput'
-                  onChange={() => {
-                    handleInputChange(event);
-                    setErrMsg((prevMsg) => ({
-                      ...prevMsg,
-                      lastName: '',
-                    }));
-                  }}
-                />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor='email'>Email</Label>
-              <div className='mt-1'>
-                <TextInput
-                  id='email'
-                  name='email'
-                  type='text'
-                  placeholder='example@fitnessbuddy.com'
-                  value={newClient.email}
-                  color={errMsg.email ? 'failure' : 'gray'}
-                  helperText={errMsg.email && errMsg.email}
-                  className='textInput'
-                  onChange={() => {
-                    handleInputChange(event);
-                    setErrMsg((prevMsg) => ({
-                      ...prevMsg,
-                      email: '',
-                    }));
-                  }}
-                />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor='phone'>Phone number</Label>
-              <div className='mt-1'>
-                <TextInput
-                  id='phone'
-                  name='phone'
-                  type='text'
-                  placeholder='123-456-7890'
-                  value={newClient.phone}
-                  color={errMsg.phone ? 'failure' : 'gray'}
-                  helperText={errMsg.phone && errMsg.phone}
-                  className='textInput'
-                  onChange={() => {
-                    handleInputChange(event);
-                    setErrMsg((prevMsg) => ({
-                      ...prevMsg,
-                      phone: '',
-                    }));
-                  }}
-                />
-              </div>
-            </div>
+            {inputs.map((input) => (
+              <Input
+                key={input.label.htmlFor}
+                label={input.label}
+                input={input.input}
+                handleInputChange={handleInputChange}
+                setErrMsg={setErrMsg}
+                onKeyDown={
+                  input.input.name === 'sessions'
+                    ? () => handleKeyPress(event)
+                    : undefined
+                }
+              />
+            ))}
             <div>
               <Label htmlFor='membershipType'>Membership Type</Label>
               <div className='mt-1'>
@@ -220,28 +150,6 @@ const AddClient = ({ setOpen, isOpen, setSaved }) => {
                   <option value='basic'>Basic</option>
                   <option value='premium'>Premium</option>
                 </Select>
-              </div>
-            </div>
-            <div>
-              <Label htmlFor='sessions'>Sessions</Label>
-              <div className='mt-1'>
-                <TextInput
-                  id='sessions'
-                  name='sessions'
-                  value={newClient.sessions}
-                  type='text'
-                  color={errMsg.sessions ? 'failure' : 'gray'}
-                  helperText={errMsg.sessions && errMsg.sessions}
-                  onKeyDown={() => handleKeyPress(event)}
-                  className='textInput'
-                  onChange={() => {
-                    handleInputChange(event);
-                    setErrMsg((prevMsg) => ({
-                      ...prevMsg,
-                      sessions: '',
-                    }));
-                  }}
-                />
               </div>
             </div>
           </div>
