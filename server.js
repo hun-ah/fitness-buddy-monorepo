@@ -8,8 +8,10 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const nocache = require('nocache');
 const app = express();
+const cors = require('cors');
 const path = require('path');
 const PORT = process.env.PORT || 3000;
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 // Route variables
 const registerRoutes = require('./routes/register');
@@ -26,14 +28,26 @@ app.use(nocache());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// development vs. production CORS/cookie options
+isDevelopment &&
+  app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+
+const developmentCookie = {
+  SameSite: 'none',
+  Secure: 'false',
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
+const productionCookie = {
+  secure: true,
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
 // Sessions
 app.use(
   session({
     secret: process.env.SECRET,
-    cookie: {
-      secure: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    },
+    cookie: isDevelopment ? developmentCookie : productionCookie,
     proxy: true,
     resave: false,
     saveUninitialized: false,
