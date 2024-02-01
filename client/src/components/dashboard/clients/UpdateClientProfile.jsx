@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import apiUrl from '@/api';
+import Input from '@/components/inputs/Input';
+import { clientProfileInputs } from '@/props/props';
 import {
   Button,
   Label,
@@ -10,11 +12,6 @@ import {
 } from 'flowbite-react';
 import { handleKeyPress } from '@/helpers/helpers';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import {
-  formatFirstName,
-  formatLastName,
-  formatPhoneNumber,
-} from '@/helpers/helpers';
 import { emailRegex, phoneRegex, whitespaceRegex } from '@/helpers/regex';
 import { useEffect, useState } from 'react';
 import { useAppContext as ClientContext } from '@/components/contexts/ClientContext';
@@ -219,6 +216,11 @@ const UpdateClientProfile = ({ client, setSaved }) => {
     }
   };
 
+  const inputs = clientProfileInputs(formInputs, errMsg, client);
+  const nameInputs = inputs.slice(0, 2);
+  const contactInputs = inputs.slice(2, 4);
+  const sessionsInput = inputs.slice(4, 5);
+
   return (
     <form className='flex flex-col gap-8' onSubmit={() => handleSubmit(event)}>
       <Modal
@@ -254,130 +256,45 @@ const UpdateClientProfile = ({ client, setSaved }) => {
       <div className='flex flex-col lg:flex-row gap-8'>
         <div className='flex flex-col gap-4 w-full'>
           <h2 className='text-md font-bold'>Name</h2>
-          <div className='flex flex-col'>
-            <div className='mb-2 block'>
-              <Label htmlFor='firstName' value='First name' />
+          {nameInputs.map((input) => (
+            <div key={input.label.htmlFor} className='flex flex-col'>
+              <Input
+                label={input.label}
+                input={input.input}
+                handleInputChange={handleInputChange}
+                setErrMsg={setErrMsg}
+              />
             </div>
-            <TextInput
-              id='firstName'
-              name='firstName'
-              type='text'
-              placeholder={formatFirstName(firstName)}
-              value={formInputs.firstName}
-              className='textInput'
-              onChange={() => {
-                handleInputChange(event);
-                setErrMsg((prevMsg) => ({
-                  ...prevMsg,
-                  firstName: '',
-                }));
-              }}
-              shadow
-              color={errMsg.firstName ? 'failure' : 'gray'}
-              helperText={errMsg.firstName && errMsg.firstName}
-            />
-          </div>
-          <div className='flex flex-col'>
-            <div className='mb-2 block'>
-              <Label htmlFor='lastName' value='Last name' />
-            </div>
-            <TextInput
-              id='lastName'
-              name='lastName'
-              type='text'
-              placeholder={formatLastName(lastName)}
-              value={formInputs.lastName}
-              className='textInput'
-              onChange={() => {
-                handleInputChange(event);
-                setErrMsg((prevMsg) => ({
-                  ...prevMsg,
-                  lastName: '',
-                }));
-              }}
-              shadow
-              color={errMsg.lastName ? 'failure' : 'gray'}
-              helperText={errMsg.lastName && errMsg.lastName}
-            />
-          </div>
+          ))}
         </div>
         <div className='flex flex-col gap-4 w-full'>
           <h2 className='text-md font-bold'>Contact</h2>
-          <div className='flex flex-col '>
-            <div className='mb-2 block'>
-              <Label htmlFor='email' value='Email' />
+          {contactInputs.map((input) => (
+            <div key={input.label.htmlFor} className='flex flex-col'>
+              <Input
+                label={input.label}
+                input={input.input}
+                handleInputChange={handleInputChange}
+                setErrMsg={setErrMsg}
+              />
             </div>
-            <TextInput
-              id='email'
-              name='email'
-              type='text'
-              placeholder={email}
-              value={formInputs.email}
-              className='textInput'
-              onChange={() => {
-                handleInputChange(event);
-                setErrMsg((prevMsg) => ({
-                  ...prevMsg,
-                  email: '',
-                }));
-              }}
-              shadow
-              color={errMsg.email ? 'failure' : 'gray'}
-              helperText={errMsg.email && errMsg.email}
-            />
-          </div>
-          <div className='flex flex-col '>
-            <div className='mb-2 block'>
-              <Label htmlFor='phone' value='Phone number' />
-            </div>
-            <TextInput
-              id='phone'
-              name='phone'
-              type='text'
-              placeholder={formatPhoneNumber(phone)}
-              value={formInputs.phone}
-              className='textInput'
-              onChange={() => {
-                handleInputChange(event);
-                setErrMsg((prevMsg) => ({
-                  ...prevMsg,
-                  phone: '',
-                }));
-              }}
-              shadow
-              color={errMsg.phone ? 'failure' : 'gray'}
-              helperText={errMsg.phone && errMsg.phone}
-            />
-          </div>
+          ))}
         </div>
       </div>
       <div className='flex flex-col lg:flex-row gap-8'>
         <div className='flex flex-col gap-4 w-full'>
           <h2 className='text-md font-bold'>Sessions remaining</h2>
-          <div className='flex flex-col'>
-            <div className='mb-2 block'>
-              <Label htmlFor='sessions' value='Sessions remaining' />
+          {sessionsInput.map((input) => (
+            <div key={input.label.htmlFor} className='flex flex-col'>
+              <Input
+                label={input.label}
+                input={input.input}
+                handleInputChange={handleInputChange}
+                setErrMsg={setErrMsg}
+                onKeyDown={() => handleKeyPress(event)}
+              />
             </div>
-            <TextInput
-              id='sessions'
-              name='sessions'
-              type='text'
-              placeholder={sessions}
-              value={formInputs.sessions}
-              onKeyDown={() => handleKeyPress(event)}
-              className='textInput'
-              onChange={() => {
-                handleInputChange(event);
-                setErrMsg((prevMsg) => ({
-                  ...prevMsg,
-                  sessions: '',
-                }));
-              }}
-              shadow
-              color={errMsg.sessions ? 'failure' : 'gray'}
-              helperText={errMsg.sessions && errMsg.sessions}
-            />
-          </div>
+          ))}
         </div>
         <div className='flex flex-col gap-4 w-full'>
           <h2 className='text-md font-bold'>Account</h2>
