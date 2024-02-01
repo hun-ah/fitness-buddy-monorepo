@@ -1,6 +1,6 @@
 import { Label, TextInput } from 'flowbite-react';
 
-const Input = ({ label, input, handleInputChange, setErrMsg }) => {
+const Input = ({ label, input, handleInputChange, setErrMsg, onKeyDown }) => {
   const { htmlFor, labelValue } = label;
   const { id, name, type, placeholder, inputValue, errMsg } = input;
 
@@ -23,6 +23,7 @@ const Input = ({ label, input, handleInputChange, setErrMsg }) => {
         color={errMsg ? 'failure' : 'gray'}
         helperText={errMsg && errMsg}
         className='textInput'
+        onKeyDown={onKeyDown}
         onChange={() => {
           handleInputChange(event);
           setErrMsg((prevMsg) => ({
