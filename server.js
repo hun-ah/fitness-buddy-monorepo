@@ -11,6 +11,7 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 const PORT = process.env.PORT || 3000;
+// run NODE_ENV=development node server.js to start in dev
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 // Route variables
