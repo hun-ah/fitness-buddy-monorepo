@@ -99,6 +99,7 @@ const AddClient = ({ setOpen, isOpen, setSaved }) => {
     });
   };
 
+  // pass AddClient component state to addClientInputs (prevent errors in props.js file) and store in new variable to map over
   const inputs = addClientInputs(newClient, errMsg);
 
   return (
