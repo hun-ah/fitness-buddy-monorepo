@@ -12,16 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const UpdateClientProfile = ({ client, setSaved }) => {
   const navigate = useNavigate();
-  let {
-    firstName,
-    lastName,
-    email,
-    phone,
-    sessions,
-    membershipType,
-    active,
-    _id,
-  } = client;
+  let { membershipType, active, _id } = client;
 
   const initialInputState = {
     firstName: '',
@@ -209,6 +200,7 @@ const UpdateClientProfile = ({ client, setSaved }) => {
     }
   };
 
+  // pass UpdateClientProfile component state to clientProfileInputs (prevent errors in props.js file) and store in new variable to map over
   const inputs = clientProfileInputs(formInputs, errMsg, client);
   const nameInputs = inputs.slice(0, 2);
   const contactInputs = inputs.slice(2, 4);
