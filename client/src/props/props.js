@@ -273,7 +273,7 @@ export const clientProfileInputs = (formInputs, errMsg, client) => {
     {
       label: {
         htmlFor: 'sessions',
-        labelValue: 'Phone number',
+        labelValue: 'Sessions',
       },
       input: {
         id: 'sessions',
@@ -281,6 +281,80 @@ export const clientProfileInputs = (formInputs, errMsg, client) => {
         errMsg: errMsg.sessions,
         name: 'sessions',
         placeholder: client.sessions,
+        type: 'text',
+      },
+    },
+  ];
+};
+
+export const addClientInputs = (newClient, errMsg) => {
+  return [
+    {
+      label: {
+        htmlFor: 'firstName',
+        labelValue: 'First Name',
+      },
+      input: {
+        id: 'firstName',
+        inputValue: newClient.firstName,
+        errMsg: errMsg.firstName,
+        name: 'firstName',
+        placeholder: 'Bonnie',
+        type: 'text',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'lastName',
+        labelValue: 'Last Name',
+      },
+      input: {
+        id: 'lastName',
+        inputValue: newClient.lastName,
+        errMsg: errMsg.lastName,
+        name: 'lastName',
+        placeholder: 'Green',
+        type: 'text',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'email',
+        labelValue: 'Email',
+      },
+      input: {
+        id: 'email',
+        inputValue: newClient.email,
+        errMsg: errMsg.email,
+        name: 'email',
+        placeholder: 'bonniegreen@fitnessbuddy.com',
+        type: 'text',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'phone',
+        labelValue: 'Phone number',
+      },
+      input: {
+        id: 'phone',
+        inputValue: newClient.phone,
+        errMsg: errMsg.phone,
+        name: 'phone',
+        placeholder: '123-456-7890',
+        type: 'text',
+      },
+    },
+    {
+      label: {
+        htmlFor: 'sessions',
+        labelValue: 'Sessions',
+      },
+      input: {
+        id: 'sessions',
+        inputValue: newClient.sessions,
+        errMsg: errMsg.sessions,
+        name: 'sessions',
         type: 'text',
       },
     },
