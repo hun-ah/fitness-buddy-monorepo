@@ -48,7 +48,7 @@ const AdminHome = ({ isLoading, sessionsCompleted }) => {
     {
       icon: <HiOutlineCheckCircle className='text-gray-500' />,
       title: 'Completed sessions this month',
-      value: sessionsCompleted,
+      value: sessionsCompleted ? sessionsCompleted : 0,
     },
   ];
 
