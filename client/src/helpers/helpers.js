@@ -1,5 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { emailRegex, phoneRegex, whitespaceRegex } from '@/helpers/regex';
+import {
+  emailRegex,
+  phoneRegex,
+  whitespaceRegex,
+  passwordRegex,
+} from '@/helpers/regex';
 
 // Format first name
 export const formatFirstName = (name) => {
