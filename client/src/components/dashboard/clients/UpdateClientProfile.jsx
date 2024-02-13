@@ -254,6 +254,7 @@ const UpdateClientProfile = ({ client, setSaved }) => {
               id='membershipType'
               name='membershipType'
               className='selectInput'
+              value={formInputs.membershipType}
               onChange={() => {
                 handleInputChange(event);
               }}
