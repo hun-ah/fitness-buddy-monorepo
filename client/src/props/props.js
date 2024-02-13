@@ -202,9 +202,9 @@ export const profileInputs = (formInputs, errMsg, user) => {
       },
       input: {
         id: 'confirmPassword',
-        inputValue: formInputs.password,
-        errMsg: errMsg.password,
-        name: 'password',
+        inputValue: formInputs.confirmPassword,
+        errMsg: errMsg.confirmPassword,
+        name: 'confirmPassword',
         placeholder: '••••••••',
         type: 'password',
       },
