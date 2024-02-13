@@ -8,12 +8,7 @@ import { useAppContext as ClientContext } from '@/components/contexts/ClientCont
 import { useAppContext as UserContext } from '@/components/contexts/UserContext';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  emailRegex,
-  passwordRegex,
-  phoneRegex,
-  whitespaceRegex,
-} from '@/helpers/regex';
+import { validateProfileUpdate } from '@/helpers/helpers';
 
 const UpdateProfile = ({ setSaved }) => {
   const { user, setUser, clearUser } = UserContext();
@@ -72,58 +67,12 @@ const UpdateProfile = ({ setSaved }) => {
       }
     });
 
-    const newErrors = {};
-
     // Form validation
-    if (
-      modifiedInputs.firstName &&
-      (!updatedData.firstName || whitespaceRegex.test(updatedData.firstName))
-    ) {
-      newErrors.firstName = 'Enter a valid name';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.lastName &&
-      (!updatedData.lastName || whitespaceRegex.test(updatedData.lastName))
-    ) {
-      newErrors.lastName = 'Enter a valid last name';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.phone &&
-      (!updatedData.phone || !phoneRegex.test(updatedData.phone))
-    ) {
-      newErrors.phone = 'Enter valid phone number';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.email &&
-      (!updatedData.email || !emailRegex.test(updatedData.email))
-    ) {
-      newErrors.email = 'Enter a valid email address';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.password &&
-      (!updatedData.password || !passwordRegex.test(updatedData.password))
-    ) {
-      newErrors.password =
-        'Password must be at least 8 characters long, contain at least one uppercase and lowercase letter and contain one digit';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.confirmPassword &&
-      (!updatedData.confirmPassword ||
-        updatedData.password != updatedData.confirmPassword)
-    ) {
-      newErrors.confirmPassword = 'Passwords must match';
-      setErrMsg(newErrors);
-    }
+    const newErrors = validateProfileUpdate(
+      modifiedInputs,
+      updatedData,
+      setErrMsg
+    );
 
     // If no errors, submit data
     if (

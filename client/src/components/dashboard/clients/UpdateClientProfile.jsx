@@ -3,9 +3,8 @@ import apiUrl from '@/api';
 import Input from '@/components/inputs/Input';
 import { clientProfileInputs } from '@/props/props';
 import { Button, Label, Modal, Select, ToggleSwitch } from 'flowbite-react';
-import { handleKeyPress } from '@/helpers/helpers';
+import { handleKeyPress, validateProfileUpdate } from '@/helpers/helpers';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { emailRegex, phoneRegex, whitespaceRegex } from '@/helpers/regex';
 import { useEffect, useState } from 'react';
 import { useAppContext as ClientContext } from '@/components/contexts/ClientContext';
 import { useNavigate } from 'react-router-dom';
@@ -78,48 +77,12 @@ const UpdateClientProfile = ({ client, setSaved }) => {
       updatedData.active = formInputs.active;
     }
 
-    const newErrors = {};
-
     // Form validation
-    if (
-      modifiedInputs.firstName &&
-      (!updatedData.firstName || whitespaceRegex.test(updatedData.firstName))
-    ) {
-      newErrors.firstName = 'Enter a valid name';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.lastName &&
-      (!updatedData.lastName || whitespaceRegex.test(updatedData.lastName))
-    ) {
-      newErrors.lastName = 'Enter a valid last name';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.phone &&
-      (!updatedData.phone || !phoneRegex.test(updatedData.phone))
-    ) {
-      newErrors.phone = 'Enter valid phone number';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.email &&
-      (!updatedData.email || !emailRegex.test(updatedData.email))
-    ) {
-      newErrors.email = 'Enter a valid email address';
-      setErrMsg(newErrors);
-    }
-
-    if (
-      modifiedInputs.sessions &&
-      (!updatedData.sessions || whitespaceRegex.test(updatedData.sessions))
-    ) {
-      newErrors.sessions = 'Enter a number of sessions';
-      setErrMsg(newErrors);
-    }
+    const newErrors = validateProfileUpdate(
+      modifiedInputs,
+      updatedData,
+      setErrMsg
+    );
 
     // If no errors, submit data
     if (

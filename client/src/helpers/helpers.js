@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import { emailRegex, phoneRegex, whitespaceRegex } from '@/helpers/regex';
+
 // Format first name
 export const formatFirstName = (name) => {
   return name.split('')[0].toUpperCase() + name.slice(1);
@@ -169,4 +171,70 @@ export const processAvatarImage = async (imgFile) => {
 
     reader.readAsDataURL(imgFile);
   });
+};
+
+export const validateProfileUpdate = (
+  modifiedInputs,
+  updatedData,
+  setErrMsg
+) => {
+  const newErrors = {};
+
+  const validationRules = {
+    firstName: {
+      condition: modifiedInputs.firstName,
+      validation:
+        !updatedData.firstName || whitespaceRegex.test(updatedData.firstName),
+      errorMessage: 'Enter a valid name',
+    },
+    lastName: {
+      condition: modifiedInputs.lastName,
+      validation:
+        !updatedData.lastName || whitespaceRegex.test(updatedData.lastName),
+      errorMessage: 'Enter a valid last name',
+    },
+    phone: {
+      condition: modifiedInputs.phone,
+      validation: !updatedData.phone || !phoneRegex.test(updatedData.phone),
+      errorMessage: 'Enter valid phone number',
+    },
+    email: {
+      condition: modifiedInputs.email,
+      validation: !updatedData.email || !emailRegex.test(updatedData.email),
+      errorMessage: 'Enter a valid email address',
+    },
+    sessions: {
+      condition: modifiedInputs.sessions,
+      validation:
+        !updatedData.sessions || whitespaceRegex.test(updatedData.sessions),
+      errorMessage: 'Enter a number of sessions',
+    },
+    password: {
+      condition: modifiedInputs.password,
+      validation:
+        !updatedData.password || !passwordRegex.test(updatedData.password),
+      errorMessage:
+        'Password must be at least 8 characters long, contain at least one uppercase and lowercase letter and contain one digit',
+    },
+    confirmPassword: {
+      condition: modifiedInputs.confirmPassword,
+      validation:
+        !updatedData.confirmPassword ||
+        updatedData.password != updatedData.confirmPassword,
+      errorMessage: 'Passwords must match',
+    },
+  };
+
+  Object.keys(validationRules).forEach((key) => {
+    const rule = validationRules[key];
+    if (rule.condition && rule.validation) {
+      newErrors[key] = rule.errorMessage;
+    }
+  });
+
+  if (Object.keys(newErrors).length > 0) {
+    setErrMsg(newErrors);
+  }
+
+  return newErrors;
 };
